@@ -15,7 +15,6 @@ test_images_np=np.load('./Project3_Data/MNIST_test_images.npy')
 test_labels_np=np.load('./Project3_Data/MNIST_test_labels.npy')
 
 
-##Template MLP code
 def softmax(x):
     return np.exp(x)/np.sum(np.exp(x))
 
@@ -28,8 +27,6 @@ def CrossEntropy(y_hat,y):
 class MLP():
 
     def __init__(self):
-        #Initialize all the parametres
-        #Uncomment and complete the following lines
         self.W1 = np.random.normal(loc=0,scale=0.1, size = (64,784))
         self.b1 = 0
         self.W2 = np.random.normal(loc=0,scale=0.1, size = (64,10))
@@ -43,8 +40,6 @@ class MLP():
         self.b1_grad = 0
 
     def forward(self, x):
-        #Feed data through the network 
-        #Uncomment and complete the following lines
         self.x = x
         self.W1x = np.dot(self.W1, self.x) 
         self.a1 = self.W1x + self.b1
@@ -56,8 +51,6 @@ class MLP():
         return self.y_hat
 
     def update_grad(self,y):
-        # Compute the gradients for the current observation y and add it to the gradient estimate over the entire batch
-        # Uncomment and complete the following lines
         dA2db2 = 1
         dA2dW2 = self.f1
         dA2dF1 = self.W2
@@ -175,16 +168,16 @@ if input("Train or Load data (t or l): ") == "t":
     plt.ylabel("Training and Validation Accuracy on 50000 images")
     plt.legend()
     plt.show()
-    np.save('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/W1_',myNet.W1)
-    np.save('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/W2_',myNet.W2)
-    np.save('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/b1_',myNet.b1)
-    np.save('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/b2_',myNet.b2)
+    np.save('/Users/shreyasvaderiyattil/Documents/W1_',myNet.W1)
+    np.save('/Users/shreyasvaderiyattil/Documents/W2_',myNet.W2)
+    np.save('/Users/shreyasvaderiyattil/Documents/b1_',myNet.b1)
+    np.save('/Users/shreyasvaderiyattil/Documents/b2_',myNet.b2)
     '''
 else:
-    myNet.W1 = np.load('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/mlp2000weights/W1.npy')
-    myNet.W2 = np.load('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/mlp2000weights/W2.npy')
-    myNet.b1 = np.load('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/mlp2000weights/b1.npy')
-    myNet.b2 = np.load('/Users/shreyasvaderiyattil/Documents/CMSC426/Project3-1/mlp2000weights/b2.npy')
+    myNet.W1 = np.load('/Users/shreyasvaderiyattil/Documents/mlp2000weights/W1.npy')
+    myNet.W2 = np.load('/Users/shreyasvaderiyattil/Documents/mlp2000weights/W2.npy')
+    myNet.b1 = np.load('/Users/shreyasvaderiyattil/Documents/mlp2000weights/b1.npy')
+    myNet.b2 = np.load('/Users/shreyasvaderiyattil/Documents/mlp2000weights/b2.npy')
 
 confusion_matrix = np.zeros((10,10))
 total = np.zeros(10)
@@ -218,7 +211,6 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 class ConvNet(nn.Module):
-    #From https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
     def __init__(self):
         super(ConvNet, self).__init__()
         self.conv1 = nn.Conv2d(1, 6, 5)
@@ -244,8 +236,6 @@ def train_cnn(convnet,  num_images, n_epochs, learning_rate):
 
     train_accuracy = []
     val_accuracy = []
-
-
 
     for i in range(n_epochs):            
         running_loss = 0.0
